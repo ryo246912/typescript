@@ -1,0 +1,10 @@
+FROM node:14.15.1-alpine3.10
+
+RUN mkdir /code
+
+WORKDIR /code
+
+COPY . /code
+
+##MEMO 初回作成時は実施しない→create-react-appなどでpackage.json作成したら実施する
+# RUN npm install

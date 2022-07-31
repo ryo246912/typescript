@@ -1,0 +1,14 @@
+version: '3'
+services:
+  react:
+    container_name: react
+    build:
+      context: .
+      dockerfile: dockerfileNode
+    volumes:
+      - .:/code:cached
+      - /code/node_modules #data volume（ホスト側のディレクトリを指定しない volume mount）することで、空の node_modules/とバインドされることを回避
+    command: sh -c "cd react-sample && npm start"
+    tty: true
+    ports:
+      - "3000:3000"
