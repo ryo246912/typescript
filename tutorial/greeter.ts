@@ -109,3 +109,35 @@ function x(fruits:fruits = 'apple'){
 console.log(greeter2(user2))
 
 document.body.textContent = greeter(user);
+
+//ジェネリクス
+function fun<T>(args:T):T {
+  return args;
+}
+
+const fun2 = <T extends string | number>(args: T): T => args;
+
+let result0 = fun<string>("Hello World");
+let result1 = fun({ name: 'John Doe' });
+
+
+function funs<T,U>(arg1: T, arg2: U): [T, U] {
+  return [arg1, arg2];
+}
+let result2 = funs('Hello', 100);
+
+let result3 = fun<PersonTypeUnion>({ age: 10, lastName:'test',weight:100 });
+
+interface KeyPair<T, U> {
+  key: T;
+  value: U;
+}
+
+type KeyPair2<T, U> = {
+  key: T;
+  value: U;
+};
+
+const kv1: KeyPair<number, string> = { key: 1, value: 'Steve' };
+const kv2: KeyPair2<number, number> = { key: 1, value: 1000 };
+const kv3: KeyPair<string, string[]> = { key: '10', value: ['John','Steve','Jane'] };
