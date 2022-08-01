@@ -45,4 +45,67 @@ const hello: (name: string) => string = (name: string): string => {
   return 'Hello ' + name;
 };
 
+//interface
+interface PersonInterface {
+  firstName: string;
+  lastName: string;
+}
+
+interface PersonInterface {
+  greeting: (message: string) => string;
+  // greeting(message: string): string;
+}
+interface greeterInterface {
+  (name: string): string;
+}
+
+let user2: PersonInterface = {
+  firstName: "John",
+  lastName: "Smith",
+  greeting(message) {
+    return `${message} ${this.firstName}`;
+  },
+}
+
+//type
+type Name = string;
+type fruits = 'apple' | 'banana' | 'lemon';
+
+type PersonFirst = {
+  firstName: string;
+  age: number;
+  height: number;
+};
+type PersonLast = {
+  lastName: string;
+  age: number;
+  weight: number;
+};
+type PersonType = PersonFirst & PersonLast;
+type PersonTypeUnion = PersonFirst | PersonLast;
+
+type greeterType = (person: PersonInterface) => string;
+
+const user3: PersonTypeUnion = {
+  firstName: 'John',
+  lastName: 'Doe',
+  age: 10,
+  weight: 60,
+};
+
+const greeter2 : greeterType = (person: PersonInterface) => {
+  console.log(person.greeting("test"))
+  return "Hello, " + person.firstName + " " + person.lastName;
+}
+
+function greeter2a(person: { firstName: Name; lastName: string }) {
+  return 'Hello, ' + person.firstName + ' ' + person.lastName;
+}
+
+function x(fruits:fruits = 'apple'){
+  return fruits
+}
+
+console.log(greeter2(user2))
+
 document.body.textContent = greeter(user);
