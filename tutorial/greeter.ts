@@ -141,3 +141,13 @@ type KeyPair2<T, U> = {
 const kv1: KeyPair<number, string> = { key: 1, value: 'Steve' };
 const kv2: KeyPair2<number, number> = { key: 1, value: 1000 };
 const kv3: KeyPair<string, string[]> = { key: '10', value: ['John','Steve','Jane'] };
+
+//型アサーション
+const getValue = (format: boolean): string | number => {
+  return format ? '10' : 10;
+};
+
+const value3 = getValue(true) as string;
+const digit = value3.length;
+const value4 = <string>getValue(true);
+const digit2 = value4.length;
