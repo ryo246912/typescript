@@ -151,3 +151,72 @@ const value3 = getValue(true) as string;
 const digit = value3.length;
 const value4 = <string>getValue(true);
 const digit2 = value4.length;
+
+//typeof演算子
+let firstName = 'John';
+let price = 20;
+const user4 = {
+  firstName: 'John',
+  lastName: 'Doe',
+};
+
+type Name1 = typeof firstName //string
+type Price = typeof price //number
+type User = typeof user4; //object→type User= {firstName:string, lastName:string}
+
+const person: User = {
+  firstName: 'Jane',
+  lastName: 'Doe',
+}
+
+// as constを利用することでtypeof演算子で取得できる型がstring型からリテラル型に変わる
+const user5 = {
+  firstName: 'John',
+  lastName: 'Doe',
+} as const;
+
+type User2 = typeof user5;
+//　結果
+// type User2 = {
+//   readonly firstName: "John";
+//   readonly lastName: "Doe";
+// }
+
+const fruits4 = ['apple', 'banana', 'lemon'];
+type Fruit4 = typeof fruits4;
+//結果
+// string[]
+
+const fruits5 = [1, 100, 2];
+type Fruit5 = typeof fruits5;
+//結果
+// number[]
+
+const fruits6 = [100, 'banana', 'lemon'];
+type Fruit6 = typeof fruits6;
+//結果
+// (string|number)[]
+
+const fruits7 = ['apple', 'banana', 'lemon'] as const;
+type Fruit7 = typeof fruits7;
+// 結果
+// type Fruit = 'apple' | 'banana' | 'lemon'
+const ary:Fruit7 = ['apple', 'banana', 'lemon']
+
+// keyof演算子→keyのUnion型
+type User2keys = keyof User2;
+// 結果
+// type User2keys = 'firstName' | 'lastName'
+const str:User2keys = 'firstName'
+
+// typeof演算子+keyof演算子
+const person2 = {
+  name: 'John Doe',
+  age: 30
+};
+const u: keyof typeof person2 = 'name';
+//const u: name | age
+
+// as const
+// user5.firstName = 'xxx' //オブジェクトのプロパティ更新不可
+// fruits7.push('test') //配列に要素追加不可
