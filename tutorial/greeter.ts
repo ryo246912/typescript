@@ -220,3 +220,36 @@ const u: keyof typeof person2 = 'name';
 // as const
 // user5.firstName = 'xxx' //オブジェクトのプロパティ更新不可
 // fruits7.push('test') //配列に要素追加不可
+
+// インデックスシグネチャ
+const IS = () => {
+  type UserType = {
+    [key: string]: string | number;    
+    middleName: string;
+    age: number;
+  };
+  type UserType2 = {
+    [key: number]: string;
+  };
+  interface UserIF {
+    [Key: number]: string;
+  }
+  
+  const user: UserType = {
+    firstName: 'John',
+    lastName: 'Doe',
+    age:10,
+    middleName:'M'
+  };
+  const user3: UserType2 = {
+    1: 'John',
+    2: 'Doe',
+  };
+
+  const user2 : UserIF = {
+    1:'1',
+    2:'2',
+  }
+  user2[1] = 'test'
+
+}
