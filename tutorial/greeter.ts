@@ -17,8 +17,20 @@ const TY = () => {
   const fruits: string[] = ['apple', 'banana'];
   const fruits3: (string | number)[] = ['apple', 10];
   const fruits2: Array<string | number> = ['apple', 'banana'];
+
+    // 読み取り専用  
+  const nums1: readonly number[] = [1, 2, 3];
+  const nums2: ReadonlyArray<number> = [1, 2, 3];
+    // 読み取り専用の配列を代入したい場合は、型アサーションで型註釈を上書きする
+  const readonlyNumbers: readonly number[] = [1, 2, 3];
+  const writableNumbers: number[] = readonlyNumbers as number[];
+
   // タプル
   const fruits_tuple:[string,number] = ['apple',10];
+    // 可変長の配列をタプル型で定義できる
+  const a1: [number, ...string[]] = [3, 'foo', 'bar'];
+  const b1: [...string[], number] = ['foo', 'bar', 'baz', 0];
+
   // null
   const value:null = null;
   // undefined
@@ -46,6 +58,17 @@ const TY = () => {
   const hello: (name: string) => string = (name: string): string => {
     return 'Hello ' + name;
   };
+  // void型
+  function foo(): void {
+    console.log('hello');
+  }
+  // 可変長変数
+  const func = (foo: string, ...bar: number[]) => bar;
+  func('baz', 1, 2, 3);
+  // タプル型を配列の型として、関数の引数の型をまとめて定義できる
+  type Args = [string, number, boolean];
+  const func2 = (...args: Args) => args[1];
+  const v = func2('foo', 3, true);
 }
 
 //interface・Type
@@ -249,6 +272,18 @@ const IS = () => {
   type UserType2 = {
     [key: number]: string;
   };
+
+  // keyにリテラル型はできないっぽい？
+  type FruitType = {
+    [key:string]: 'apple' | 'orange',
+    // [key2:'apple']:string
+  }
+
+  const Fruit: FruitType = {
+    red: "apple",
+    orange: "orange",
+  };
+
   interface UserIF {
     [Key: number]: string;
   }
@@ -270,4 +305,18 @@ const IS = () => {
   }
   user2[1] = 'test'
 
+}
+
+// Record
+const Rc = () => {
+  type StringNumber = Record<string, number>;
+  const value: StringNumber = { a: 1, b: 2, c: 3 };
+
+  // keyにリテラル型を設定できる
+  type Person = Record<"firstName" | "middleName" | "lastName", string>;
+  const person: Person = {
+    firstName: "Robert",
+    middleName: "Cecil",
+    lastName: "Martin",
+  };
 }
