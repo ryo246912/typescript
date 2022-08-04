@@ -18,7 +18,7 @@ const TY = () => {
   const fruits3: (string | number)[] = ['apple', 10];
   const fruits2: Array<string | number> = ['apple', 'banana'];
 
-    // 読み取り専用  
+    // 読み取り専用
   const nums1: readonly number[] = [1, 2, 3];
   const nums2: ReadonlyArray<number> = [1, 2, 3];
     // 読み取り専用の配列を代入したい場合は、型アサーションで型註釈を上書きする
@@ -78,7 +78,7 @@ const IFTY = () => {
     firstName: string;
     lastName: string;
   }
-  
+
   interface PersonInterface {
     greeting: (message: string) => string;
     // greeting(message: string): string;
@@ -86,7 +86,7 @@ const IFTY = () => {
   interface greeterInterface {
     (name: string): string;
   }
-  
+
   let user: PersonInterface = {
     firstName: "John",
     lastName: "Smith",
@@ -94,10 +94,10 @@ const IFTY = () => {
       return `${message} ${this.firstName}`;
     },
   }
-  
+
   type Name = string;
   type fruits = 'apple' | 'banana' | 'lemon';
-  
+
   type PersonFirst = {
     firstName: string;
     age: number;
@@ -110,29 +110,29 @@ const IFTY = () => {
   };
   type PersonType = PersonFirst & PersonLast;
   type PersonTypeUnion = PersonFirst | PersonLast;
-  
+
   type greeterType = (person: PersonInterface) => string;
-  
+
   const user2: PersonTypeUnion = {
     firstName: 'John',
     lastName: 'Doe',
     age: 10,
     weight: 60,
   };
-  
+
   const greeter : greeterType = (person: PersonInterface) => {
     console.log(person.greeting("test"))
     return "Hello, " + person.firstName + " " + person.lastName;
   }
-  
+
   function greeter2(person: { firstName: Name; lastName: string }) {
     return 'Hello, ' + person.firstName + ' ' + person.lastName;
   }
-  
+
   function x(fruits:fruits = 'apple'){
     return fruits
   }
-  
+
   console.log(greeter(user))
 }
 
@@ -147,34 +147,34 @@ const Generics = () => {
   function fun<T>(args:T):T {
     return args;
   }
-  
+
   const fun2 = <T extends string | number>(args: T): T => args;
-  
+
   let result0 = fun<string>("Hello World");
   let result1 = fun({ name: 'John Doe' });
-  
-  
+
+
   function funs<T,U>(arg1: T, arg2: U): [T, U] {
     return [arg1, arg2];
   }
   let result2 = funs('Hello', 100);
-  
+
   let result3 = fun<PersonLast>({ age: 10, lastName:'test',weight:100 });
-  
+
   interface KeyPair<T, U> {
     key: T;
     value: U;
   }
-  
+
   type KeyPair2<T, U> = {
     key: T;
     value: U;
   };
-  
+
   const kv1: KeyPair<number, string> = { key: 1, value: 'Steve' };
   const kv2: KeyPair2<number, number> = { key: 1, value: 1000 };
   const kv3: KeyPair<string, string[]> = { key: '10', value: ['John','Steve','Jane'] };
-  
+
 }
 
 //型アサーション
@@ -182,11 +182,11 @@ const TYAssert = () => {
   const getValue = (format: boolean): string | number => {
     return format ? '10' : 10;
   };
-  
+
   const value = getValue(true) as string;
   const digit = value.length;
   const value2 = <string>getValue(true);
-  const digit2 = value2.length;  
+  const digit2 = value2.length;
 }
 
 // typeof・keyof
@@ -265,7 +265,7 @@ const TypeofKeyof = () =>{
 // インデックスシグネチャ
 const IS = () => {
   type UserType = {
-    [key: string]: string | number;    
+    [key: string]: string | number;
     middleName: string;
     age: number;
   };
@@ -287,7 +287,7 @@ const IS = () => {
   interface UserIF {
     [Key: number]: string;
   }
-  
+
   const user: UserType = {
     firstName: 'John',
     lastName: 'Doe',
