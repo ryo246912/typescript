@@ -151,5 +151,51 @@ const E2_5 = () => {
 
 }
 
+const E3_1 = () => {
+  // function mapFromArray<T>(arr:T[], key:keyof T):Map<T[keyof T], T>
+  // ↓見栄えが悪いので、演算子 T などはまとめる
+  function mapFromArray<T,K extends keyof T>(arr:T[], key:K):Map<T[K], T> {
+
+    const result = new Map();
+    for (const obj of arr) {
+      result.set(obj[key], obj);
+    }
+    return result;
+  }
+
+  const data = [
+    { id: 1, name: "John Smith" },
+    { id: 2, name: "Mary Sue" },
+    { id: 100, name: "Taro Yamada" }
+  ];
+  const dataMap = mapFromArray(data, "id");
+
+  //TODO Tがオブジェクト以外の場合、メソッドのプロパティが通るのはどうする？(連想配列のオブジェクトのみの型註釈できる？)
+  const dataMap2 = mapFromArray([1,2,3], "toString");
+}
+
+const E3_1a = () => {
+  // TODO オブジェクトとしてRecord<string,any>入れてみた
+  function mapFromArray2<T extends Record<string,any>,K extends keyof T>(arr:T[], key:K):Map<T[K], T> {
+
+    const result = new Map();
+    for (const obj of arr) {
+      result.set(obj[key], obj);
+    }
+    return result;
+  }
+
+  const data = [
+    { id: 1, name: "John Smith" },
+    { id: 2, name: "Mary Sue" },
+    { id: 100, name: "Taro Yamada" }
+  ];
+  const dataMap = mapFromArray2(data, "id");
+
+  // 一応エラー出るようにはなった
+  // const dataMap2 = mapFromArray2([1,2,3], "toString");
+
+}
+
 const E = () => {
 }
